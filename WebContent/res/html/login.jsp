@@ -33,10 +33,12 @@
 String logout=request.getParameter("flag");
 if(logout !=null && logout.equals("logout")){
 	session.setAttribute("flag",false);
+	session.setAttribute("profileid",0);
 	out.println("<h1>Logout successful!</h1>");
 	response.setHeader("refresh","1;URL=login.jsp");	
 }
 Boolean flag=(Boolean) session.getAttribute("flag");
+Integer profileid = (Integer) session.getAttribute("profileid");
 %>
 <script>
 	function validate(f){
@@ -89,10 +91,12 @@ Boolean flag=(Boolean) session.getAttribute("flag");
 		}	
 	}
 		if(flag !=null && flag.equals(true)){
-			out.println("Redirecting after 3 seconds,if not redirect please click here: <h2><a href='index.jsp'>UserList</a><h2>");
+			request.getAttribute("profileid");
+			out.println("The profileID IS: " + profileid.toString() + "Redirecting after 3 seconds,if not redirect please click here: <h2><a href='index.jsp'>UserList</a><h2>");
+			out.println("<h1>The profileID IS: " + profileid.toString() +"</h1>");
 			response.setHeader("refresh","3;URL=/res/html/index.jsp");
 		}
-		
+
 		/*
 		else{
 			session.setAttribute("flag", false);

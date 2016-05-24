@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head> 
-    <title>Computer Science Bibliography Homepage</title>
+    <title>FoundITAPP Index</title>
 	
 	<script>
 		function validate() 
@@ -29,7 +29,12 @@
  <body>
  <center>
  
-
+The profileID IS: 
+<%
+HttpSession Session = request.getSession();
+String profileID = (String) session.getAttribute("profileid");
+%>
+<h1>The profileID IS: <%=profileID%></h1>
  	
  	<table  border="1" width="80%">
  	

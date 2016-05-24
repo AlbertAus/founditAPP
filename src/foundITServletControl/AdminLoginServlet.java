@@ -16,8 +16,10 @@ public class AdminLoginServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException{
 		String path = "login.jsp" ;
 		Boolean flag=false; 	//Define whether login is successful.
+		int profileid=0;
 		//req.setAttribute("flag", flag);
 		req.getSession().setAttribute("flag", flag);
+		req.getSession().setAttribute("profileid", profileid);
 		//System.out.println(req.toString());
 		String email = req.getParameter("email") ;
 		String userpass = req.getParameter("userpass") ;
@@ -42,17 +44,21 @@ public class AdminLoginServlet extends HttpServlet {
 					flag=true;
 					//req.setAttribute("flag", flag);
 					req.getSession().setAttribute("flag", flag);
-					req.getSession().setAttribute("profileid", user.getProfileID());
+					profileid=user.getProfileID();
+					System.out.print("Profileid is: " + profileid + "\r\n");
+					req.getSession().setAttribute("profileid",profileid);
 				} else {
 					info.add("Fail!Wrong email or password.") ;
 					flag=false;
 					req.getSession().setAttribute("flag", flag);
+					req.getSession().setAttribute("profileid",profileid);
 				}
 			}catch(Exception e){
 				e.printStackTrace() ;
 			}
 		}
 		req.setAttribute("info",info) ;
+		req.setAttribute("profileid",profileid);
 		req.getRequestDispatcher(path).forward(req,resp) ;
 	}
 	public void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException,IOException{
