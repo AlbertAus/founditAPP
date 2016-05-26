@@ -94,7 +94,7 @@ Integer profileid = (Integer) session.getAttribute("profileid");
 			request.getAttribute("profileid");
 			out.println("The profileID IS: " + profileid.toString() + "Redirecting after 3 seconds,if not redirect please click here: <h2><a href='index.jsp'>UserList</a><h2>");
 			out.println("<h1>The profileID IS: " + profileid.toString() +"</h1>");
-			response.setHeader("refresh","3;URL=/res/html/index.jsp");
+			response.setHeader("refresh","3;URL=./application-profile.html");
 		}
 
 		/*

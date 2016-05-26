@@ -30,7 +30,7 @@ public class databaseConnection {
 	private DataSource ds = null;
 	private Connection conn = null ;
 //	private String dbAddr="jdbc:sqlite:" + Struts2Util.getServletContext().getRealPath("/") + "foundITAPP.db";
-	public String dbAddr ="jdbc:sqlite:" + this.getClass().getClassLoader().getResource("").getPath() + "foundITAPP.db";
+	public String dbAddr ="jdbc:sqlite:/Users/zhangyun/git/FoundITService/db/foundITApp.db";
 //	public String dbAddr ="jdbc:sqlite:" + "f:/java/cs9322_prac/workspace/founditapp/webcontent/" + "founditapp.db";
 	public databaseConnection() throws Exception{
 		try{
@@ -43,7 +43,7 @@ public class databaseConnection {
 			System.out.println("Test to here 1\n\r");
 			Class.forName("org.sqlite.JDBC");
 			System.out.println("Test to here 2\n\r");
-	         //建立�?��数据库名employees.db的连接，如果不存在就在当前目录下创建�? 
+	         //建立�?��数据库名employees.db的连接，如果不存在就在当前目录下创建�? 
 	         conn = DriverManager.getConnection(dbAddr);  
 	         System.out.println("dbAddr is "+dbAddr+"\n");
 		}catch(Exception e){

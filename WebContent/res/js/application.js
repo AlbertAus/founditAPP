@@ -9,8 +9,9 @@ var heading = new Array();
     heading[5] = "rel" 
 var mockExecDAG = new Array();
 var executionTag = "";
+var profileID = (String) session.getAttribute("profileid");
 
-
+alert("profileid");
 window.onload=function(){
 	var cmpuserID = "1234";
 
