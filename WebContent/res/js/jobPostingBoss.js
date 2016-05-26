@@ -23,7 +23,7 @@ window.onload=function(){
     clear("task-table");
   
     //addTable("task-table", heading, mockExecDAG)
-    ajaxSend(url, "get", "", "admin", null, function (d){
+    ajaxSend(url, "get", "","app-manager", null, function (d){
     	//	alert(d)
     
     	addTableWithButton("task-table", heading, presentData(d))
@@ -124,7 +124,7 @@ function onApply(d){
 	alert("111111111111");
 	var res = d.split(",");
 	
-	 window.location.href="./application.html";
+	 window.location.href="./applicationBoss.html";
 	 document.cookie = "cmpID=" + res[1];
 	 document.cookie = "lastPage=" + "jobPostingBoss";
 	 //document.cookie = "cmpID=" + res[1];
@@ -133,11 +133,8 @@ function onApply(d){
 }
 
 
-function onUpdate(d) {
-	
-  alert(d[0])
-  window.location.href = "http://google.com.au/?gws_rd=" + d[1];
-}
+
+
 
 function onDel(d){
 	var res = d.split(",");
@@ -147,7 +144,7 @@ function onDel(d){
     clear("task-table");
   
     //addTable("task-table", heading, mockExecDAG)
-    ajaxSend(url, "delete", "", "admin", null, function (d){
+    ajaxSend(url, "delete", "","app-manager", null, function (d){
     	if(d) alert("Submit Success!!!!!!!!!");
     	 clear("task-table");
     window.location.href = "./jobPostingBoss.html";

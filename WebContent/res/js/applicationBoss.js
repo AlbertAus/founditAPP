@@ -11,22 +11,18 @@ var mockExecDAG = new Array();
 var executionTag = "";
 
 
-window.onload=function(){
-	var cmpuserID = "1234";
-
-	var url = "http://localhost:8080/FoundITService/application/search?1=1";
-	if (cmpuserID) url =url + "&userID="+cmpuserID;
-
+	alert("from jobposting");
+	window.onload=function(){
+	var url = "http://localhost:8080/FoundITService/application/search?cmpID="+curCmpID;
+	alert(curCmpID);
     clear("task-table");
   
     //addTable("task-table", heading, mockExecDAG)
-    ajaxSend(url, "get", "", "app-candidate", null, function (d){
-    	//	alert(d)
-    
+    ajaxSend(url, "get", "", "app-manager", null, function (d){
     	addTableWithButton("task-table", heading, presentData(d))
-    	
-    });
-}
+    	},function(){
+	   alert("no response..");});}
+
 
 function presentData(arr) {
 	var tableArr = new Array();
@@ -90,18 +86,14 @@ function presentData(arr) {
 
         
 
-            var del =  document.createElement('button');
-            del.setAttribute('class', 'btn btn-danger');
-            del.appendChild(document.createTextNode("Delete"));
-            del.setAttribute('onclick', 'onDel("' + table_data[i] + '");' );
             
-//            var shortList =  document.createElement('button');
-//            shortList.setAttribute('class', 'btn btn-info');
-//            shortList.appendChild(document.createTextNode("ShortListed"));
-//            shortList.setAttribute('onclick', 'onShort("' + table_data[i]+ '");' );
+            var shortList =  document.createElement('button');
+            shortList.setAttribute('class', 'btn btn-info');
+            shortList.appendChild(document.createTextNode("ShortListed"));
+            shortList.setAttribute('onclick', 'onShort("' + table_data[i]+ '");' );
             btd.appendChild(submit);
-            btd.appendChild(del);
-//            btd.appendChild(shortList);
+           
+            btd.appendChild(shortList);
             tr.appendChild(btd)
         }
     }
@@ -124,20 +116,39 @@ var myPage = "application";
 
 
 
-
-function onDel(d){
+function onShort(d) {
 	var res = d.split(",");
+	var url = "http://localhost:8080/FoundITService/Review/Application/" + res[0];
 	
-	var url = "http://localhost:8080/FoundITService/application/"+res[0];
-
-    clear("task-table");
-  
-    //addTable("task-table", heading, mockExecDAG)
-    ajaxSend(url, "delete", "", "app-candidate", null, function (d){
-    	
-    	 clear("task-table");
-   // window.location.href = "./application.html";
-   
-},function(){
+	ajaxSend(url, "get", {
+		"autoStatus" : "1"
+	},"app-manager",  null, function(d){
+		alert(d.length);
+		var sucCount = 0;
+		for(var i=0; i<d.length; i++ ){
+			if(d[i].revStatus == "1"){
+				sucCount += 1;
+			}
+		}
+		alert(sucCount);
+		if(sucCount >= 2) {
+			updateState();
+		}
+		
+	},function(){
 		   alert("no response..");});
+
+    function updateState(){
+    	var url = "http://localhost:8080/FoundITService/application/" + res[0];
+    	clear("task-table");
+    	// addTable("task-table", heading, mockExecDAG)
+    	ajaxSend(url, "put", {
+    		"autoStatus" : "1"
+    	}, "admin", null, function(d) {
+    		window.location.reload(true);
+    	}, function(){
+    		window.location.reload(false);
+    	});
+    }
+
 }

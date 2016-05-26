@@ -38,8 +38,8 @@ $('#ajax-btn').click(function(){
     clear("task-table");
   
     //addTable("task-table", heading, mockExecDAG)
-    ajaxSend(url, "get", "", "admin", null, function (d){
-    	//	alert(d)
+    ajaxSend(url, "get", "","app-candidate", null, function (d){
+    	//alert(d)
     
     	addTableWithButton("task-table", heading, presentData(d))
     	
@@ -54,6 +54,7 @@ function presentData(arr) {
 		var d = arr[i];
 		var link = "";
 		if(d.links) link = d.links[0].href;
+		
 
 		tableArr[i] = new Array(d.jobID, d.cmpID, d.name, d.salaryRate, d.posType,d.location, d.status, link,d.jobDsp);
 	}    

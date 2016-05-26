@@ -12,7 +12,7 @@ if(curLink != null && curRel != null&& lastpage== "application"  ){
 	window.onload=function(){
 		alert(curLink);
 		alert("start load,"+curLink+","+curRel+","+curJobId);
-		ajaxSend(curLink, curRel, {"jobID":curJobId,"userID":curUserID}, "admin", null, function (d){	
+		ajaxSend(curLink, curRel, {"jobID":curJobId,"userID":curUserID},"app-candidate", null, function (d){	
 			document.getElementById("exampleTextarea").value = d[0].cvLetter;
 			
 		});
@@ -35,7 +35,7 @@ $('#btn-submit').click(function(){
 	    ajaxSend(url, "put", {
 	    		"cvLetter":curCv,
 	    		"autoStatus":"0"
-	    		}, "admin", null, function (d){
+	    		},  "app-candidate",null, function (d){
 	    	if(d) alert("Submit Success!!!!!!!!!");
 	});
 		
@@ -47,7 +47,7 @@ $('#btn-submit').click(function(){
 	    clear("task-table");
 	  
 	    //addTable("task-table", heading, mockExecDAG)
-	    ajaxSend(url, "post", {"jobID":curJobId,"userID":curUserID,"cvLetter":curCv}, "admin", null, function (d){
+	    ajaxSend(url, "post", {"jobID":curJobId,"userID":curUserID,"cvLetter":curCv},"app-candidate",  null, function (d){
 	    	if(d) alert("Submit Success!!!!!!!!!");
 	    
 	   
@@ -62,7 +62,7 @@ $('#btn-close').click(function(){
 	    clear("task-table");
 	  
 	    //addTable("task-table", heading, mockExecDAG)
-	    ajaxSend(url, "delete", "", "admin", null, function (d){
+	    ajaxSend(url, "delete", "", "app-candidate", null, function (d){
 	    	if(d) alert("Submit Success!!!!!!!!!");
 	    window.location.href = "./application.html";
 	   
